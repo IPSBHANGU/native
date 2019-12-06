@@ -52,6 +52,7 @@
 #include "RenderArea.h"
 #include "SurfaceFlinger.h"
 #include "TransactionCompletedThread.h"
+#include <android/hardware/graphics/common/1.0/types.h>
 
 #include <android/hardware/graphics/common/1.0/types.h>
 
