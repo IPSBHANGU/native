@@ -140,9 +140,7 @@ PhaseOffsets::PhaseOffsets() {
     mOffsets.insert({RefreshRateType::LOW1, defaultOffsets});
     mOffsets.insert({RefreshRateType::LOW2, defaultOffsets});
     mOffsets.insert({RefreshRateType::DEFAULT, defaultOffsets});
-    mOffsets.insert({RefreshRateType::PERFORMANCE, perfFpsOffsets});
-    mOffsets.insert({RefreshRateType::HIGH1, highFpsOffsets});
-    mOffsets.insert({RefreshRateType::HIGH2, highFpsOffsets});
+    mOffsets.insert({RefreshRateType::PERFORMANCE, highFpsOffsets});
 
     mOffsetThresholdForNextVsync = phaseOffsetThresholdForNextVsyncNs != -1
             ? phaseOffsetThresholdForNextVsyncNs
