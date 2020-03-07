@@ -666,12 +666,12 @@ bool Layer::isSecureCamera() const {
     return protected_buffer && camera_output;
 }
 
-bool Layer::isSecureCamera() const {
-    const sp<GraphicBuffer>& activeBuffer(mActiveBuffer);
-    bool protected_buffer = activeBuffer && (activeBuffer->getUsage() & BufferUsage::PROTECTED);
-    bool camera_output = activeBuffer && (activeBuffer->getUsage() & BufferUsage::CAMERA_OUTPUT);
-    return protected_buffer && camera_output;
-}
+//bool Layer::isSecureCamera() const {
+//    const sp<GraphicBuffer>& activeBuffer(mActiveBuffer);
+//    bool protected_buffer = activeBuffer && (activeBuffer->getUsage() & BufferUsage::PROTECTED);
+//    bool camera_output = activeBuffer && (activeBuffer->getUsage() & BufferUsage::CAMERA_OUTPUT);
+//    return protected_buffer && camera_output;
+//}
 
 void Layer::setVisibleRegion(const Region& visibleRegion) {
     // always called from main thread

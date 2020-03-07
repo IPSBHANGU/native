@@ -3703,7 +3703,7 @@ void SurfaceFlinger::updateInputFlinger() {
         setInputWindowsFinished();
     }
 
-    executeInputWindowCommands();
+    mInputWindowCommands.clear();
 }
 
 void SurfaceFlinger::updateInputWindowInfo() {
@@ -3725,19 +3725,6 @@ void SurfaceFlinger::updateInputWindowInfo() {
 void SurfaceFlinger::commitInputWindowCommands() {
     mInputWindowCommands = mPendingInputWindowCommands;
     mPendingInputWindowCommands.clear();
-}
-
-void SurfaceFlinger::executeInputWindowCommands() {
-    for (const auto& transferTouchFocusCommand : mInputWindowCommands.transferTouchFocusCommands) {
-        if (transferTouchFocusCommand.fromToken != nullptr &&
-            transferTouchFocusCommand.toToken != nullptr &&
-            transferTouchFocusCommand.fromToken != transferTouchFocusCommand.toToken) {
-            mInputFlinger->transferTouchFocus(transferTouchFocusCommand.fromToken,
-                                              transferTouchFocusCommand.toToken);
-        }
-    }
-
-    mInputWindowCommands.clear();
 }
 
 void SurfaceFlinger::updateCursorAsync()
@@ -4116,19 +4103,6 @@ bool SurfaceFlinger::doComposeSurfaces(const sp<DisplayDevice>& displayDevice,
     const auto& displayState = display->getState();
     const auto displayId = display->getId();
     auto& renderEngine = getRenderEngine();
-    bool isSecureDisplay = false;
-    bool isSecureCamera = false;
-    for (const auto& layer : displayDevice->getVisibleLayersSortedByZ()) {
-        if (layer->isSecureDisplay()) {
-            isSecureDisplay = true;
-        }
-        if (layer->isSecureCamera()) {
-            isSecureCamera = true;
-        }
-    }
-
-    const bool supportProtectedContent =
-            renderEngine.supportsProtectedContent() && !isSecureDisplay && !isSecureCamera;
 
     const Region bounds(displayState.bounds);
     const DisplayRenderArea renderArea(displayDevice);
